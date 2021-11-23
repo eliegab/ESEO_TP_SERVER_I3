@@ -232,4 +232,25 @@ public class VilleDAOImpl implements VilleDAO {
 		
 		return response;
 	}
+
+	@Override
+	public int deleteVille(String codeCommune) {
+		int response=-1;
+		try {	
+			Connection conn = JDBCConfiguration.getConnection();
+	
+			Statement st = conn.createStatement(); 
+			
+			String request = "DELETE FROM ville_france WHERE code_commune_insee='"+codeCommune+"'";
+			System.out.println(request);
+			response = st.executeUpdate(request);
+	
+	        conn.close(); 
+	    } catch (Exception e) { 
+	        System.err.println("Got an exception! "); 
+	        System.err.println(e.getMessage()); 
+	    } 
+		
+		return response;
+	}
 }

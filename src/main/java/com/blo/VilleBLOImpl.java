@@ -2,6 +2,8 @@ package com.blo;
 
 import java.util.ArrayList;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -39,6 +41,20 @@ ArrayList<Ville> listeVille;
 	@Override
 	public int updateVille(Ville ville) {
 		return villeDAO.updateVille(ville);
+	}
+
+	@Override
+	public int deleteVille(String codeCommune) {
+		String code="";
+		System.out.println(codeCommune);
+		try {
+			JSONObject jsonThing= new JSONObject(codeCommune);
+			code=(String) jsonThing.get("codeCommune");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return villeDAO.deleteVille(code);
 	}
 
 }

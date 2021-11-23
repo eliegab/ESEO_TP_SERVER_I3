@@ -2,6 +2,7 @@ package com.controller;
 
 import java.util.ArrayList;
 
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,12 +50,22 @@ public class VilleControler {
 
 	}
 
-	// Methode POST
+	// Methode PUT
 	@RequestMapping(value = "/ville", method = RequestMethod.PUT, consumes = "application/json")
 	@ResponseBody
 	public int appelPut(@RequestBody Ville ville) {
 		System.out.println("Appel PUT");
 		int response = villeBLOService.updateVille(ville);
+		return response;
+
+	}
+	
+	// Methode DELETE
+	@RequestMapping(value = "/ville", method = RequestMethod.DELETE, consumes = "application/json")
+	@ResponseBody
+	public int appelDelete(@RequestBody String codeCommune) {
+		System.out.println("Appel PUT");
+		int response = villeBLOService.deleteVille(codeCommune);
 		return response;
 
 	}

@@ -12,5 +12,6 @@ public interface VilleDAO {
 	public ArrayList<Ville> findVille(MultiValueMap<String,String> monParam);
 	public int addVille(Ville ville);
 	public int updateVille(Ville ville);
+	public int deleteVille(String codeCommune);
 
 }
