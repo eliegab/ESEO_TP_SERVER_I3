@@ -25,9 +25,7 @@ public class VilleDAOImpl implements VilleDAO {
 
 		ResultSet resultSet = null;
 		String requete = "SELECT * FROM ville_france";
-		Statement stmt = null;
-		try {
-			stmt = con.createStatement();
+		try(Statement stmt = con.createStatement()) {
 			resultSet = stmt.executeQuery(requete);
 
 			
@@ -46,7 +44,6 @@ public class VilleDAOImpl implements VilleDAO {
 				listVille.add(ville);
 				
 			}
-			stmt.close();
 			resultSet.close();
 
 		} catch (SQLException e) {
