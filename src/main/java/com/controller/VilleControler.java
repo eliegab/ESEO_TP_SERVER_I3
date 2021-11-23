@@ -17,7 +17,7 @@ import com.dto.Ville;
 
 @RestController
 public class VilleControler {
-	
+
 	@Autowired
 	VilleBLO villeBLOService;
 
@@ -36,16 +36,26 @@ public class VilleControler {
 		}
 
 		return listeVille;
-		
+
 	}
-	
+
 	// Methode POST
-		@RequestMapping(value = "/ville", method = RequestMethod.POST, consumes = "application/json")
-		@ResponseBody
-		public int appelPost(@RequestBody Ville ville) {
-			System.out.println("Appel POST");
-			int response = villeBLOService.addVille(ville);
-			return response;
-			
-		}
+	@RequestMapping(value = "/ville", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public int appelPost(@RequestBody Ville ville) {
+		System.out.println("Appel POST");
+		int response = villeBLOService.addVille(ville);
+		return response;
+
+	}
+
+	// Methode POST
+	@RequestMapping(value = "/ville", method = RequestMethod.PUT, consumes = "application/json")
+	@ResponseBody
+	public int appelPut(@RequestBody Ville ville) {
+		System.out.println("Appel PUT");
+		int response = villeBLOService.updateVille(ville);
+		return response;
+
+	}
 }

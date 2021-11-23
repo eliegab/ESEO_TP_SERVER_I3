@@ -174,4 +174,62 @@ public class VilleDAOImpl implements VilleDAO {
 		return response;
 
 	}
+
+	@Override
+	public int updateVille(Ville ville) {
+		int response=-1;
+		try {	
+			Connection conn = JDBCConfiguration.getConnection();
+	
+			Statement st = conn.createStatement(); 
+			
+			List<String> fields = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
+			
+			if(ville.getNomCommune()!=null) {
+				fields.add("nom_commune");
+				values.add(ville.getNomCommune());
+			}
+			if(ville.getCodePostal()!=null) {
+				fields.add("code_postal");
+				values.add(ville.getCodePostal());
+			}
+			if(ville.getLibelleAcheminement()!=null) {
+				fields.add("libelle_acheminement");
+				values.add(ville.getLibelleAcheminement());
+			}
+			if(ville.getLigne()!=null) {
+				fields.add("ligne_5");
+				values.add(ville.getLigne());
+			}
+			if(ville.getLatitude()!=null) {
+				fields.add("latitude");
+				values.add(ville.getLatitude());
+			}
+			if(ville.getLongitude()!=null) {
+				fields.add("longitude");
+				values.add(ville.getLongitude());
+			}
+			
+			String updatedValue="";
+			for(int i = 0;i<fields.size();i++) {
+				if(i==0) {
+					updatedValue+=(fields.get(i)+"= '"+values.get(i)+"'");
+				}
+				else {
+					updatedValue+=(", "+fields.get(i)+"= '"+values.get(i)+"'");
+				}
+			}
+			String request = "UPDATE ville_france SET "+updatedValue+" WHERE code_commune_insee='"+ville.getCodeCommune()+"'";
+			System.out.println(request);
+			response = st.executeUpdate(request);
+	
+	        conn.close(); 
+	    } catch (Exception e) { 
+	        System.err.println("Got an exception! "); 
+	        System.err.println(e.getMessage()); 
+	    } 
+		
+		return response;
+	}
 }
