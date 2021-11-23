@@ -44,18 +44,13 @@ public class VilleDAOImpl implements VilleDAO {
 				ville.setLongitude(resultSet.getString("Longitude"));
 
 				listVille.add(ville);
+				
 			}
+			stmt.close();
+			resultSet.close();
 
 		} catch (SQLException e) {
 			// traitement de l'exception
-		} finally {
-			try {
-				stmt.close();
-				resultSet.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		return listVille;
 	}
