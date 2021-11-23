@@ -23,10 +23,8 @@ public class VilleDAOImpl implements VilleDAO {
 
 		Connection con = JDBCConfiguration.getConnection();
 
-		ResultSet resultSet = null;
 		String requete = "SELECT * FROM ville_france";
-		try(Statement stmt = con.createStatement()) {
-			resultSet = stmt.executeQuery(requete);
+		try(Statement stmt = con.createStatement();ResultSet resultSet = stmt.executeQuery(requete);) {
 
 			
 			
@@ -44,7 +42,6 @@ public class VilleDAOImpl implements VilleDAO {
 				listVille.add(ville);
 				
 			}
-			resultSet.close();
 
 		} catch (SQLException e) {
 			// traitement de l'exception
@@ -69,7 +66,6 @@ public class VilleDAOImpl implements VilleDAO {
 
 		Connection con = JDBCConfiguration.getConnection();
 
-		ResultSet resultSet = null;
 		String requete = "SELECT * FROM ville_france WHERE ";
 		int i=0;
 		for (Map.Entry<String, String> entry : prepareParameters(params).entrySet()) {
@@ -83,11 +79,7 @@ public class VilleDAOImpl implements VilleDAO {
 		    i++;
 		}
 		System.out.println(requete);
-		try {
-			Statement stmt = con.createStatement();
-			resultSet = stmt.executeQuery(requete);
-
-			
+		try(Statement stmt = con.createStatement(); ResultSet resultSet = stmt.executeQuery(requete);) {			
 			
 			while (resultSet.next()) {
 				Ville ville = new Ville();
@@ -112,10 +104,8 @@ public class VilleDAOImpl implements VilleDAO {
 	@Override
 	public int addVille(Ville ville) {
 		int response=-1;
-		try {	
-			Connection conn = JDBCConfiguration.getConnection();
-	
-			Statement st = conn.createStatement(); 
+		Connection conn = JDBCConfiguration.getConnection();
+		try(Statement st = conn.createStatement()); {		
 			
 			List<String> fields = new ArrayList<String>();
 			List<String> values = new ArrayList<String>();
@@ -178,11 +168,9 @@ public class VilleDAOImpl implements VilleDAO {
 	@Override
 	public int updateVille(Ville ville) {
 		int response=-1;
-		try {	
-			Connection conn = JDBCConfiguration.getConnection();
-	
-			Statement st = conn.createStatement(); 
-			
+		Connection conn = JDBCConfiguration.getConnection();
+
+		try(Statement st = conn.createStatement();) {					
 			List<String> fields = new ArrayList<String>();
 			List<String> values = new ArrayList<String>();
 			
@@ -236,11 +224,9 @@ public class VilleDAOImpl implements VilleDAO {
 	@Override
 	public int deleteVille(String codeCommune) {
 		int response=-1;
-		try {	
-			Connection conn = JDBCConfiguration.getConnection();
-	
-			Statement st = conn.createStatement(); 
-			
+		Connection conn = JDBCConfiguration.getConnection();
+
+		try(Statement st = conn.createStatement();) {		
 			String request = "DELETE FROM ville_france WHERE code_commune_insee='"+codeCommune+"'";
 			System.out.println(request);
 			response = st.executeUpdate(request);
