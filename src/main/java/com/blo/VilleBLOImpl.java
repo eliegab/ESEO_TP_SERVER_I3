@@ -31,4 +31,9 @@ ArrayList<Ville> listeVille;
 		return listeVille;
 	}
 
+	@Override
+	public int addVille(Ville ville) {
+		return villeDAO.addVille(ville);
+	}
+
 }

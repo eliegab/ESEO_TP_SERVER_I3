@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,8 @@ public class VilleDAOImpl implements VilleDAO {
 				ville.setCodePostal(resultSet.getString("Code_postal"));
 				ville.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
 				ville.setLigne(resultSet.getString("Ligne_5"));
+				ville.setLatitude(resultSet.getString("Latitude"));
+				ville.setLongitude(resultSet.getString("Longitude"));
 
 				listVille.add(ville);
 			}
@@ -94,6 +97,8 @@ public class VilleDAOImpl implements VilleDAO {
 				ville.setCodePostal(resultSet.getString("Code_postal"));
 				ville.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
 				ville.setLigne(resultSet.getString("Ligne_5"));
+				ville.setLatitude(resultSet.getString("Latitude"));
+				ville.setLongitude(resultSet.getString("Longitude"));
 
 				listVille.add(ville);
 			}
@@ -102,5 +107,71 @@ public class VilleDAOImpl implements VilleDAO {
 			// traitement de l'exception
 		}
 		return listVille;
+	}
+
+	@Override
+	public int addVille(Ville ville) {
+		int response=-1;
+		try {	
+			Connection conn = JDBCConfiguration.getConnection();
+	
+			Statement st = conn.createStatement(); 
+			
+			List<String> fields = new ArrayList<String>();
+			List<String> values = new ArrayList<String>();
+			
+			if(ville.getCodeCommune()!=null) {
+				fields.add("code_commune_insee");
+				values.add(ville.getCodeCommune());
+			}
+			if(ville.getNomCommune()!=null) {
+				fields.add("nom_commune");
+				values.add(ville.getNomCommune());
+			}
+			if(ville.getCodePostal()!=null) {
+				fields.add("code_postal");
+				values.add(ville.getCodePostal());
+			}
+			if(ville.getLibelleAcheminement()!=null) {
+				fields.add("libelle_acheminement");
+				values.add(ville.getLibelleAcheminement());
+			}
+			if(ville.getLigne()!=null) {
+				fields.add("ligne_5");
+				values.add(ville.getLigne());
+			}
+			if(ville.getLatitude()!=null) {
+				fields.add("latitude");
+				values.add(ville.getLatitude());
+			}
+			if(ville.getLongitude()!=null) {
+				fields.add("longitude");
+				values.add(ville.getLongitude());
+			}
+			
+			String fieldsString="";
+			String valuesString="";
+			for(int i = 0;i<fields.size();i++) {
+				if(i==0) {
+					fieldsString+=fields.get(i);
+					valuesString+="'"+values.get(i)+"'";
+				}
+				else {
+					fieldsString+=", "+fields.get(i);
+					valuesString+=", '"+values.get(i)+"'";
+				}
+			}
+			String request = "INSERT INTO ville_france("+fieldsString+") VALUES ("+valuesString+")";
+			System.out.println(request);
+			response = st.executeUpdate(request);
+	
+	        conn.close(); 
+	    } catch (Exception e) { 
+	        System.err.println("Got an exception! "); 
+	        System.err.println(e.getMessage()); 
+	    } 
+		
+		return response;
+
 	}
 }

@@ -10,5 +10,6 @@ public interface VilleBLO {
 
 	public ArrayList<Ville> getInfoVille(MultiValueMap<String,String> params);
 	public ArrayList<Ville> getAllVilles();
+	public int addVille(Ville ville);
 	
 }

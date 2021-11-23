@@ -10,5 +10,6 @@ public interface VilleDAO {
 	
 	public ArrayList<Ville> findAllVilles();
 	public ArrayList<Ville> findVille(MultiValueMap<String,String> monParam);
+	public int addVille(Ville ville);
 
 }

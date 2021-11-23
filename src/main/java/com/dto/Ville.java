@@ -3,11 +3,81 @@ package com.dto;
 
 public class Ville {
 
+	public Ville(String codeCommune, String nomCommune, String codePostal, String libelleAcheminement, String ligne, String latitude, String longitude) {
+		super();
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+		this.codePostal = codePostal;
+		this.libelleAcheminement = libelleAcheminement;
+		this.ligne = ligne;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public Ville(String codeCommune, String nomCommune, String codePostal, String libelleAcheminement, String ligne) {
+		super();
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+		this.codePostal = codePostal;
+		this.libelleAcheminement = libelleAcheminement;
+		this.ligne = ligne;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String latitude;
+	
+	public String longitude;
+	
 	public String codeCommune;
 
 	public String nomCommune;
 
 	public String codePostal;
+	
+	public Ville(String codeCommune) {
+		super();
+		this.codeCommune = codeCommune;
+	}
+
+	public Ville(String codeCommune, String nomCommune) {
+		super();
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+	}
+
+	public Ville(String codeCommune, String nomCommune, String codePostal) {
+		super();
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+		this.codePostal = codePostal;
+	}
+
+	public Ville(String codeCommune, String nomCommune, String codePostal, String libelleAcheminement) {
+		super();
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+		this.codePostal = codePostal;
+		this.libelleAcheminement = libelleAcheminement;
+	}
+
+	public Ville() {
+		super();
+	}
 
 	public String libelleAcheminement;
 

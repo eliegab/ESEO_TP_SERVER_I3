@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,13 +40,12 @@ public class VilleControler {
 	}
 	
 	// Methode POST
-		@RequestMapping(value = "/ville", method = RequestMethod.POST)
+		@RequestMapping(value = "/ville", method = RequestMethod.POST, consumes = "application/json")
 		@ResponseBody
-		public boolean appelPost(@RequestParam MultiValueMap<String, String> params) {
+		public int appelPost(@RequestBody Ville ville) {
 			System.out.println("Appel POST");
-			System.out.println(params);
-
-			return true;
+			int response = villeBLOService.addVille(ville);
+			return response;
 			
 		}
 }
