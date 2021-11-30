@@ -23,7 +23,7 @@ public class VilleDAOImpl implements VilleDAO {
 
 		Connection con = JDBCConfiguration.getConnection();
 
-		String requete = "SELECT * FROM ville_france";
+		String requete = "SELECT * FROM ville_france ORDER BY Code_commune_INSEE";
 		try(Statement stmt = con.createStatement();ResultSet resultSet = stmt.executeQuery(requete);) {
 
 			
@@ -105,7 +105,7 @@ public class VilleDAOImpl implements VilleDAO {
 	public int addVille(Ville ville) {
 		int response=-1;
 		Connection conn = JDBCConfiguration.getConnection();
-		try(Statement st = conn.createStatement()); {		
+		try(Statement st = conn.createStatement();) {		
 			
 			List<String> fields = new ArrayList<String>();
 			List<String> values = new ArrayList<String>();
